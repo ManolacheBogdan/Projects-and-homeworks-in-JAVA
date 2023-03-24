@@ -1,0 +1,258 @@
+1)Scrieti un program Java care defineste un sir de valori de tip double care vor fi citite de la tastatura. 
+Tratati exceptia data de accesarea unui element cu index negativ sau mai mare decat indexul ultimului element 
+din sir (ArrayIndexOutOfBoundsException). Afisati un mesaj corespunzator in momentul detectarii exceptiei. 
+Considerati o matrice (cu numar de coloane fix pentru fiecare linie) si tratati exceptia posibil a aparea. 
+Considerati si cazul in care matricea are numar diferit de coloane la fiecare linie.
+
+package problema1;
+
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
+public class problema1 {
+	private static double a[];
+	static Scanner scan= new Scanner(System.in);
+	public static double Exceptie(int i) throws ArrayIndexOutOfBoundsException{
+		return a[i];
+	}
+	public static void main(String[] args) {
+		int n;
+		System.out.println("Introduceti dimensiunea sirului:");
+		n=scan.nextInt();
+		double a[]=new double[n];
+		System.out.println("Introduceti valorile din tablou: ");
+		int i;
+		for(i=0;i<n;i++)
+		{
+			a[i]=scan.nextDouble();
+		}
+		try {
+			for(i=0;i<n;i++)
+			{
+				System.out.println("Sirul este: "+a[i]);
+			}
+			
+		}catch (ArrayStoreException e) {
+			System.out.println("Indexul este invalid!Reintroduceti datele: ");
+		}
+		try {
+			System.out.println(Exceptie(-1));
+			}catch (ArrayIndexOutOfBoundsException e) {
+				System.out.println("Valoarea invalida de parametrii! Reintroduceti datele!");
+		}
+	}
+}
+
+
+2)Scrieți o aplicație Java care, în cadrul metodei main( ), conține o secvență de cod care poate să lanseze 
+excepții de tip ArithmeticException, ArrayIndexOutOfBoundsException, NullPointerException, NumberFormatException 
+și altele pe care considerați că e util să le testați. Afișați în cadrul blocurilor catch mesajul generat de 
+aceste excepții. În blocul finally, afișați mesajul ”Am prins sau nu excepții”.
+
+package problema2;
+
+public class problema2 {
+
+    public static void main(String[] args) {
+        try {
+            System.out.println("Divizare cu 0");
+            System.out.println("Incercam divizarea lui 5 la 0.");
+            System.out.println("Eroare!");	
+            System.out.println(5/0);
+        }
+        catch (ArithmeticException ex) {
+            System.out.println("Arithmetic Exception gasita: " + ex);
+        }
+        finally {
+            System.out.println("E posibil sa fi gasit o exceptie!");
+        }
+        System.out.println(" ");
+
+        try {
+            System.out.println("Accesarea unui element în afara limitelor");
+            int[] a = {3,8,98,43};
+
+            System.out.println("Sirul este: ");
+            showArray(a);
+            System.out.println("Este accesat al treilea element: " + a[3]);
+        }
+        catch (ArrayIndexOutOfBoundsException ex) {
+            System.out.println("ArrayIndexOFB gasit: " + ex);
+        }
+        finally {
+            System.out.println("E posibil sa fi gasit o exceptie!");
+        }
+
+        System.out.println(" ");
+
+        try {
+            System.out.println("Accesarea unui obiect nul si cresterea acestuia");
+            Integer integer = null;
+            System.out.println("Obiectul este: " + (integer + 1));
+        }
+        catch (NullPointerException ex) {
+            System.out.println("NullPointer gasit: " + ex);
+        }
+        finally {
+            System.out.println("E posibil sa fi gasit o exceptie!");
+        }
+    }
+    private static void showArray(int[] a) {
+        for (Integer it: a) {
+            System.out.print(it + " ");
+        }
+        System.out.println(" ");
+    }
+}
+
+
+3)Definiți un pachet care declară interfața Int1 (2 variabile întregi și o metodă numita sum( ) care returnează 
+suma a doi întregi). În pachet mai există clasa Class1 (2 variabile protected de tip double, constructor, 
+metode accesor și mutator pentru variabilele din clasă). În alt fișier sursă se adaugă în același pachet o nouă 
+interfață numită Int2 (2 variabile de tip double și o metodă numită product( ) care returnează produsul a două 
+valori de tip double).
+Într-un fișier sursă distinct, importați tot ce conține pachetul definit anterior și definiți o clasă numită 
+Class2 care este derivată din Class1 și care implementează ambele interfețe Int1 și Int2. Instanțiați Class2 și 
+aplicați metodele disponibile pentru a calcula suma și produsul unor variabile citite de la tastatură.
+
+
+
+package problema3;
+
+import java.util.Scanner;
+public class problema3 {
+	static Scanner scan= new Scanner(System.in);
+	public static void main(String[] args) {
+		System.out.println("Introduceti 2 numere intregi: ");
+		int a,b;
+		double c,d;
+		a=scan.nextInt();
+		b=scan.nextInt();
+		problema3 ob1=new problema3();
+		System.out.println("Introduceti 2 numere de tip double: ");
+		 c=scan.nextDouble();
+		 d=scan.nextDouble();
+		 System.out.println("Suma numerelor este: ");
+		 System.out.println("S="+ob1.sum(a, b));
+		 System.out.println("Produsul numerelor este: ");
+		 System.out.println("P="+ob1.product(c,d));
+	}
+	private double product(double c, double d) {
+		return c*d;
+	}
+	private int sum(int a, int b) {
+		return a+b;
+	}
+}
+
+package problema3;
+
+public interface Int1 {
+	public static final int a = 0;
+	public static final int b = 0;
+	
+	int sum(int a, int b);
+}
+package problema3;
+
+public interface Int2 {
+	public static final int a = 0;
+	public static final int b = 0;
+	
+	double product(double a, double b);
+}
+
+package problema3;
+
+public class Class1 {
+	protected double x;
+	protected double y;
+	public Class1(double x, double y) {
+		this.x=x;
+		this.y=y;
+	}
+	public Class1() {
+		
+	}
+	public double getX()
+	{
+		return x;
+	}
+	public void setX( double m) {
+		this.x=m;
+	}
+	public double getY()
+	{
+		return y;
+	}
+	public void setY( double n) {
+		this.y=n;
+	}
+}
+
+package problema3;
+
+class Class2 extends Class1 implements Int1, Int2 {
+
+	public Class2(double a, double b) {
+		super(a, b);
+	}
+	
+	public Class2() {
+	}
+	public void Class1() {
+	}
+
+	public double product(double a, double b) {
+		return a*b;
+	}
+	public int sum(int a, int b) {
+		return a+b;
+	}
+}
+
+
+
+4)Creați o clasă derivată din Exception, numită SuperExceptie. O a doua clasă ExceptieMaiMica este derivată din 
+SuperExceptie. În constructorii claselor afisați un mesaj ce indică excepția generată. În cadrul unei alte 
+clase creați o metodă a( ) ce semnalizeaza (aruncă) o excepție de tip ExceptieMaiMica și o metodă b( ) ce 
+semnalizeaza o excepție de tip SuperExceptie.
+În cadrul metodei main( ) apelați aceste metode și încercați să determinați tipul de excepție semnalizată,
+precum și dacă blocul catch aferent tipului de exceptie ExceptieMaiMica poate prinde o SuperExcepție.
+
+
+public class problema4 {
+
+	public static void main(String[] args) {
+		Test object = new Test();
+		object.a();
+		object.b();
+	}
+}
+class Test {
+	void a() {
+		try {
+			throw new ExceptieMaiMica("Eroare la metoda a()!");
+		} catch (ExceptieMaiMica ex) {
+			ex.printStackTrace();
+		}
+	}
+	void b() {
+		try {
+			throw new SuperExceptie("Eroare la metoda b()!");
+		} catch (SuperExceptie ex) {
+			ex.printStackTrace();
+		}
+	}
+}
+class ExceptieMaiMica extends SuperExceptie {
+
+	public ExceptieMaiMica(String message) {
+		super("Eroare ExceptieMaiMica! ");
+	}
+}
+class SuperExceptie extends Exception {
+	public SuperExceptie(String message) {
+		super("Eroare SuperExceptie! ");
+	}
+}

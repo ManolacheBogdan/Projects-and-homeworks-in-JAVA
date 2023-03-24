@@ -1,0 +1,230 @@
+1)Scrieți o clasă Methods in care să aveți 3 metode: o metodă cu număr variabil de parametri de tip intreg, care 
+returnează media aritmetică a parametrilor; o altă metodă în care să definiți un tablou unidimensional de n 
+numere de tip double (n fiind parametrul metodei și care va fi citit în main() de la tastatură), elementele 
+acestuia vor primi valori generate aleator și metoda va returna acest tablou; o metodă statică ce primește ca 
+parametru un tablou de caractere, convertește caracterele respective în majuscule și formează din acest șir un 
+obiect String, pe care îl returnează. Din metoda main(), definită intr-o altă clasă, apelați metodele clasei 
+Methods și afișați rezultatele pe ecran (valorile de apel pentru prima metodă și șirul de caractere cu care se 
+apelează a 3-a metodă se vor defini în main()).
+
+
+//Manolache Bogdan-Gabriel, Grupa 2127, laborator 4, problema 1
+
+import java.util.Random;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.random.RandomGenerator;
+class Test{ 
+
+public static int medie(int...v) {
+	int S=0;
+	for(int n : v)
+	{
+		S+=n;
+	}
+	return S/v.length;
+}
+/*public int[] nr_rand() {
+	int[]k=new int[5];
+	Random rand=new Random();
+	for(int i=0;i<=k.length;i++) {
+		k[i]=rand.nextInt(100);
+	}
+	return k;
+}*/
+public static void convert(char[] a){
+Scanner scanner = new Scanner(System.in);
+System.out.println("Introduceti sirul:");
+
+ char[] tab =scanner.next().toCharArray();
+ System.out.println(" Elementele cu majuscule:");
+ 
+	for(int i=0;i<tab.length;i++) {
+		System.out.println(tab[i]=Character.toUpperCase(tab[i]) );
+	}
+	
+	
+	
+	
+}
+}
+
+
+
+public class Methods{
+	public static void main(String[] args) {
+	int v[]= {45, 76, 78};
+	Test ob1=new Test();
+	System.out.print("Prima metoda este media aritmetica: " );
+	System.out.println(ob1.medie(v));
+	//System.out.println("A doua metoda este: " );
+	//int tab[]=ob1.nr_rand();
+	System.out.println("A treia metoda este: ");
+	Test.convert(null);
+	
+}
+}
+
+
+2)Definiți o clasă X care va avea ca atribute un șir de caractere privat, un obiect de tip String cu 
+specificatorul protected și un întreg fără specificator de acces. Clasa va conține un constructor explicit cu 
+parametri, care va inițializa atributele, metode accesor și mutator pentru câmpurile care nu pot fi accesate 
+din afara clasei și va redefini metoda finalize() moștenită din clasa Object, care va afișa un mesaj 
+corespunzător.
+În metoda main(), plasată în altă clasă, creați un obiect din clasa X, afișați valorile atributelor, apoi 
+pregătiți obiectul pentru a fi eliminat de garbage collector. Creați apoi un nou obiect X, modificați valorile 
+atributelor și afișați pe ecran valorile acestora.
+
+
+class X {
+	 private char[]tab;
+	 protected String sir;
+	 int a;
+	 public X(char[]v,String k,int b) {
+		 setTab(v);
+		 sir=k;
+		 a=b;
+	 }
+	public char[] getTab() {
+		return tab;
+	}
+	public void setTab(char[] tab) {
+		this.tab = tab;
+	}
+	protected void finalize(){
+		System.out.println("Distrugere obiect...");
+}
+}
+class main{
+	public static void main(String[] args) {
+	X ob1=new X(null,"dgsoi",10);
+	 System.out.println(ob1.sir);
+	 System.out.println(ob1.a);
+	 ob1.setTab("asfj".toCharArray());
+	 System.out.println(ob1.getTab());
+	 ob1 = null;
+	System.gc();
+	}
+}
+
+
+
+3)Scrieți o clasă Java numită Persoană cu atributele private: nume (String), latitudine și longitudine (float). 
+Clasa conține un constructor explicit fără parametri care inițializează numele cu null și latitudinea și 
+longitudinea cu 0. Metoda finalize() va fi implementată pentru a afișa un mesaj la distrugerea obiectelor. 
+Atributele clasei se pot modifica prin metodele mutator specifice setNume(), setLatitudine() și setLongitudine().
+Atributele vor fi returnate prin metode accesor specifice. Instanțiați n obiecte, citiți și setati valorile 
+atributelor, apoi afișați datele tuturor obiectelor.
+
+
+class Persoana {
+      private String nume;
+      private float latitudine;
+      private float longitudine;
+      public Persoana(){
+    	  nume=null;
+    	  latitudine=0;
+          longitudine=0;
+       }
+      protected void finalize(){
+  		System.out.println("Distrugere obiect...");
+      }
+	public String getNume() {
+		return nume;
+	}
+	public void setNume(String nume) {
+		this.nume = nume;
+	}
+	public float getLatitudine() {
+		return latitudine;
+	}
+	public void setLatitudine(float latitudine) {
+		this.latitudine = latitudine;
+	}
+	public float getLongitudine() {
+		return longitudine;
+	}
+	public void setLongitudine(float longitudine) {
+		this.longitudine = longitudine;
+	}
+	
+}
+ class principala{
+	 public static void main(String... args) {
+		 Persoana ob1=new Persoana();
+		  ob1.setNume("Bogdan".toString());
+		 System.out.println(ob1.getNume());
+		 System.out.println("Latitudinea este: ");
+		 ob1.setLatitudine(+10);
+		 System.out.println( ob1.getLatitudine());
+		 System.out.println("Longitudinea este: ");
+		 ob1.setLongitudine(+6);
+		 System.out.println(ob1.getLongitudine());
+		 Persoana ob2=new Persoana();
+		  ob2.setNume("Cristian".toString());
+		 System.out.println(ob2.getNume());
+		 System.out.println("Latitudinea este: ");
+		 ob2.setLatitudine(+7);
+		 System.out.println( ob2.getLatitudine());
+		 System.out.println("Longitudinea este: ");
+		 ob2.setLongitudine(+12);
+		 System.out.println(ob2.getLongitudine());
+		 Persoana ob3=new Persoana();
+		 ob3.setNume("Darius".toString());
+		 System.out.println(ob3.getNume());
+		 System.out.println("Latitudinea este: ");
+		 ob3.setLatitudine(+76);
+		 System.out.println( ob3.getLatitudine());
+		 System.out.println("Longitudinea este: ");
+		 ob3.setLongitudine(+157);
+		 System.out.println(ob3.getLongitudine());
+		 ob1 = null;
+		 ob2 = null;
+		 ob3 = null;
+		 System.gc();
+	 }		
+	 }
+ 
+
+
+
+4)Construiti o aplicatie Java care sa testeze metodele noi ale clasei String, introduse in Java11.
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class java11 {
+	public static void main(String... args) {
+		System.out.println(" Metodele cu strip(), stripLeading(), stripTrailing():");
+		System.out.println();
+		String sir1 = "  Abcd,  \tEfgh\t ";
+		System.out.println("#" + sir1 + "#");
+		System.out.println("#" + sir1.strip() + "#");
+		System.out.println("#" + sir1.stripLeading() + "#");
+		System.out.println("#" + sir1.stripTrailing() + "#");
+		System.out.println();
+		System.out.println(" Metoda cu isBlank():");
+		System.out.println();
+		String sir2 = "abc";
+		System.out.println(sir2.isBlank());
+		sir2 = "";
+		System.out.println(sir2.isBlank());
+		sir2 = "\t \t";
+		System.out.println(sir2.isBlank());
+		System.out.println();
+		System.out.println(" Metoda cu lines():");
+		System.out.println();
+		String sir3 = "abc\nefg\rhij";
+		System.out.println(sir3);
+		List lines = sir3.lines().collect(Collectors.toList());
+		System.out.println(lines);
+		System.out.println();
+		System.out.println(" Metoda cu repeat():");
+		System.out.println();
+		String sir4 = "abc\n";
+		System.out.println(sir4.repeat(3));
+		sir4 = "Abcd";
+		System.out.println(sir4.repeat(2));
+	}
+}
+

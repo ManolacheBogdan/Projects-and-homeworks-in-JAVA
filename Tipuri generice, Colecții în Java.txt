@@ -1,0 +1,255 @@
+1)Creați o interfață denumită Generator<T> cu singura metodă next(T var). Implementați interfața pentru a 
+permite generarea valorilor următoare în cazul aplicării asupra unor variabile de tipuri de date concrete 
+(Integer, Character, etc.). Instanțierea clasei se va face în cadrul metodei main( ), care va fi poziționată 
+într-o clasă distinctă.
+
+interface Generator<T>{
+	public void next(T var);
+}
+class test<T> implements Generator<T>{
+	public void next(T var) {
+		System.out.println(var);
+	}
+}
+public class Problema1{
+	public static void main(String[] args) {
+		System.out.println("Valoarea intreaga a variabilei este: ");
+		test<Integer> ob1 = new test<>();
+		int x = 10;
+		ob1.next(x);
+		System.out.println("Sirul de caractere este: ");
+		test<String> ob2 = new test<>();
+		String y = "abcde";
+		ob2.next(y);
+	}
+}
+
+
+2)Creați o clasă Calculator ce are implementate metode de adunare, scădere, înmulțire și împărțire. Metodele 
+vor avea ca intrare tipuri de date generice și vor returna rezultatul conform acestor date. De exemplu, suma a 
+doi întregi va returna tot un întreg, pentru două numere de tip float se va returna tot un float. Aplicarea 
+metodelor de adunare și scădere este permisă și pe variabile de tip String, restul operațiilor fiind interzise 
+pt. acest tip de date (mesaj de eroare).
+Scrieți aceeași clasă folosind supraîncărcarea metodelor.
+
+class Calculator <T extends Number>{
+	@SuppressWarnings("hiding")
+	public <T extends Number> int sum(T a, T b) {
+		int suma;
+		suma = a.intValue() + b.intValue();
+		return suma;
+	}
+	@SuppressWarnings("hiding")
+	public <T extends Number> int dif(T a, T b) {
+		int diferenta;
+		diferenta = a.intValue() - b.intValue();
+		return diferenta;
+	}
+	@SuppressWarnings("hiding")
+	public <T extends Number> double inm(T a, T b) {
+		double produs;
+		produs = a.doubleValue() * b.doubleValue();
+		return produs;
+	}
+	@SuppressWarnings("hiding")
+	public <T extends Number> float imp(T a, T b) {
+		float impartire;
+		impartire = a.floatValue() / b.floatValue();
+		return impartire;
+	}
+	
+//supraincarcarea metodelor
+	
+	public <T extends Number> int sum_overloading(T a, T b, T c) {
+		int suma;
+		suma = a.intValue() + b.intValue() + c.intValue() ;
+		return suma;
+	}
+	public <T extends Number> float dif_overloading(T a, T b) {
+		float diferenta;
+		diferenta = a.floatValue() - b.floatValue();
+		return diferenta;
+	}
+	public <T extends Number> double inm_overloading(T a, T b, T c) {
+		double produs;
+		produs = a.doubleValue() * b.doubleValue() * c.doubleValue();
+		return produs;
+	}
+	public <T extends Number> float imp_overloading(T a, T b, T c) {
+		float impartire;
+		impartire = a.floatValue() / b.floatValue() / c.floatValue() ;
+		return impartire;
+	}
+	
+}
+
+
+
+3)Implementați o aplicație în cadrul căreia să aveți o clasă SetterGetter generică ce permite setarea și 
+returnarea valorilor atributelor pentru mai multe tipuri de obiecte. De exemplu, având clasele Copil, Adult și 
+Pensionar, să se poată seta și returna numele și vârsta acestora. Creați colecții cu intrări unice de obiecte 
+de tip Copil, Adult, Pensionar pe care să le populați cu date citite din consolă. Afișați datele preluate în 
+diferite moduri.
+
+
+import java.util.Scanner;
+class SetterGetter{
+      class Copil{
+    	  private String nume;
+    	  private int varsta;
+    	  public String getNume() {
+    	  return nume;
+    	  }
+    	  public void setNume(String nume) {
+    	  this.nume = nume;
+    	  }
+    	  public int getVarsta() {
+    	  return varsta;
+    	  }
+    	  public void setVarsta(int varsta) {
+    	  this.varsta = varsta;
+    	  }
+      }
+      class Adult{
+    	  private String nume;
+    	  private int varsta;
+    	  public String getNume() {
+    	  return nume;
+    	  }
+    	  public void setNume(String nume) {
+    	  this.nume = nume;
+    	  }
+    	  public int getVarsta() {
+    	  return varsta;
+    	  }
+    	  public void setVarsta(int varsta) {
+    	  this.varsta = varsta;
+    	  }
+      }
+      class Pensionar{
+    	  private String nume;
+    	  private int varsta;
+    	  public String getNume() {
+    	  return nume;
+    	  }
+    	  public void setNume(String nume) {
+    	  this.nume = nume;
+    	  }
+    	  public int getVarsta() {
+    	  return varsta;
+    	  }
+    	  public void setVarsta(int varsta) {
+    	  this.varsta = varsta;
+    	  }
+      }
+}
+
+public class Problema3{
+	public static void main(String[] args) {
+	Scanner scan=new Scanner(System.in);
+	String nume;
+	int varsta;
+	System.out.println("Introduceti numele: ");
+	nume=scan.next();
+	System.out.println("Introduceti varsta: ");
+	varsta=scan.nextInt();
+	}
+}
+
+
+
+4)Scrieti o clasa Student cu campurile private nume, grupa, media, si metode getter/setter pentru campuri. 
+In main(), plasata in alta clasa, creati o colectie de tip SortedSet, cu obiecte de tip Student, initializate 
+cu valori citite de la tastatura, care sa pastreze elementele descrescator dupa medie si crescator dupa nume 
+(cei care au aceeasi medie sa fie in ordine alfabetica). Parcurgeti cu for-loop colectia si afisati toate 
+elementele. Parcurgeti apoi colectia cu un iterator si afisati toti studentii cu media >=8. Parcurgeti colectia 
+cu forEach() si afisati toate datele studentilor dintr-o anumita grupa.
+
+
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.*;
+class Student<String>{
+	private String nume;
+	private int grupa;
+	private float medie;
+	
+	  public void setNume(String nume) {
+    	  this.nume = nume;
+    	  }
+	  public String getNume() {
+    	  return nume;
+    	  }
+	  public void setGrupa(int grupa) {
+    	  this.grupa = grupa;
+    	  }
+	  public int getGrupa() {
+    	  return grupa;
+    	  }
+	  public void setMedie(float medie) {
+    	  this.medie = medie;
+    	  }
+	  public double getMedie() {
+    	  return medie;
+    	  }
+	public Iterator<Student> iterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}
+
+public class Problema4{
+	public static void main(String[] args) {
+		Student <String>ob1 = new Student<>(); 
+		Scanner scan=new Scanner(System.in);
+		/*Student tab[]=new Student[4];
+		String nume;
+		int a;
+		float b;
+		SortedSet <Student>set = new TreeSet<Student>();
+		for(int i=0; i<tab.length;i++)
+		{
+		System.out.println("Nume: ");
+		nume=scan.next();
+		System.out.println("Grupa: ");
+		a=scan.nextInt();
+		System.out.println("Medie: ");
+		b=scan.nextFloat();
+		tab[i]=new Student();
+		tab[i].setNume(nume);
+		tab[i].setGrupa(a);
+		tab[i].setMedie(b);
+
+		set.add(tab[i]);
+		}*/
+		
+		ob1.setNume("Bogdan".toString());
+        System.out.println("Numele este:" +ob1.getNume());
+        ob1.setGrupa(3);
+        System.out.println("Grupa este:" + ob1.getGrupa());
+        ob1.setMedie(8);
+        System.out.println("Media este:" + ob1.getMedie());
+        Student <String>ob2 = new Student<>(); 
+        ob2.setNume("Cristi".toString());
+        System.out.println("Numele este:" +ob2.getNume());
+        ob2.setGrupa(2);
+        System.out.println("Grupa este:" + ob2.getGrupa());
+        ob2.setMedie(6);
+        System.out.println("Media este:" + ob2.getMedie());
+        Student <String>ob3 = new Student<>(); 
+        ob3.setNume("George".toString());
+        System.out.println("Numele este:" +ob3.getNume());
+        ob3.setGrupa(1);
+        System.out.println("Grupa este:" + ob3.getGrupa());
+        ob3.setMedie(9);
+        System.out.println("Media este:" + ob3.getMedie());
+        
+        Iterator <Student>it = ob1.iterator();
+        while (it.hasNext()) {
+        Student nume = it.next();
+        System.out.println(nume);
+        }
+	}
+}

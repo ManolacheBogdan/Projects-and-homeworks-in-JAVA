@@ -1,0 +1,173 @@
+1)Să se creeze o aplicație Java în cadrul căreia există o clasă ce implementează interfața Runnable. 
+Constructorul clasei permite definirea unui nume asociat fiecărui obiect instanțiat din clasa respectivă și de 
+asemenea clasa are un atribut static ce contorizează numărul de obiecte instanțiate. Metoda run( ) a clasei va 
+afișa numele obiectului de un număr de ori egal cu valoarea contorului și cu o întârziere de 1000 msec între 
+afișări.
+Dintr-o clasă separată, creați mai multe fire de execuție cu obiecte diferite din clasa descrisă anterior și 
+analizați rezultatele afișate.
+
+class Nume extends Thread implements Runnable{
+public static int nr = 0;
+
+public Nume(String nume) {
+	super(nume);
+	nr++;
+}
+	
+	@Override
+	public void run() {
+		int nr1 = nr;
+		while(nr1!=0) {
+			System.out.println(getName());
+			try{
+				Thread.sleep(1000);
+			}
+			catch(InterruptedException e) {}
+			nr1--;
+			System.out.println();
+		}
+	}
+}
+
+public class Problema1{
+	
+public static void main(String[] args) {
+	Nume ob1 = new Nume("Bogdan");
+	Nume ob2 = new Nume("Marius");
+	Nume ob3 = new Nume("Cristian");
+	ob1.start();
+	ob2.start();
+	ob3.start();
+	}
+}
+
+
+
+2)Scrieti o aplicatie Java in care un fir de executie genereaza 30 numere aleatoare intre 0 si 30 si un alt fir 
+de executie afiseaza aria cercului cu raza generata de primul fir de executie, daca aceasta raza este 
+divizibila cu 3.
+
+import java.util.Random;
+class test extends Thread{
+	Random rand=new Random();
+	public void run(){
+		System.out.println("Numerele aleatorii sunt: ");
+	     int k = 0;
+	      for(int i=0;i<30;i++) {
+	                k=rand.nextInt (29);
+	                System.out.print(k+ " ");
+	                System.out.println();
+	                System.out.println("Aria cercului cu raza " +k+ " este: " +arie(k));
+	        }
+	      System.out.println();
+	}
+    public double arie(int r){
+    	double A = 0;
+    	double pi = 3.14159;
+    	if(r%3==0)
+    	{
+    		A=pi*r*r;
+    	}
+    	return A;
+    }
+	
+}
+public class Problema2{
+	public static void main(String[] args) {
+		test ob=new test();
+		ob.start();
+	}
+}
+
+
+3)Scrieti o clasa pentru determinarea unui element din sirul lui Fibonacci. In clasa vor fi 2 metode, una care 
+calculeaza valoarea elementului si alta care afiseaza acea valoare. Folositi mecanismul de multithreading cu 
+sincronizare, astfel incat in timp ce un fir de executie realizeaza calculul, celalalt sa afiseze valorile 
+intermediare (toate componentele sirului pana la elementul calculat).
+
+
+import java.util.Scanner;
+class fibonacci extends Thread{
+	public Object lock;
+	Scanner scan=new Scanner(System.in);
+	public void run() {
+		System.out.println("Dati un element n: ");
+		int n=scan.nextInt();
+		System.out.println("Al "+n+ "-lea element din sirul lui Fibonacci este: "+fib(n));
+		afisare_fib(n);
+	}
+	 public int fib(int n) {
+	 synchronized(lock){
+         if (n < 2) {
+            return n;
+         }
+         else {
+          return fib(n-1)+fib(n-2);
+         }
+}
+}
+	 public void afisare_fib(int n) {
+		 synchronized(lock) {
+			 int fib1=0;
+			 int fib2=1;
+			 int fib=fib1+fib2;
+			 System.out.print("Elementele din sirul lui Fibonacci pana la "+n+ " sunt:");
+			 for(int i=0;i<n-1;i++)
+			 {
+				 fib2=fib1;
+				 fib1=fib;
+				 fib=fib1+fib2;
+				 System.out.print(fib2+" ");
+			 }
+			 
+		 }
+	 }
+}
+
+
+ public class Problema3{
+	public static void main(String[] args) {
+		Problema3 ob=new Problema3();
+		fibonacci thread=new fibonacci();
+		thread.lock=ob;
+		thread.start();
+	
+	}
+}
+
+
+4)Scrieți o aplicație Java ce calculează cel mai mare divizor comun a două numere mari (>100.000). Aplicația va 
+citi de la tastatură în mod continuu perechi de câte două numere și va lansa în execuție câte un thread pentru 
+fiecare pereche citită. Rezultatele vor fi afișate în consolă în momentul finalizării metodei de calcul a cmmdc.
+
+import java.util.Scanner;
+class cmmdc extends Thread {
+	Scanner scan = new Scanner(System.in);
+	public void run( ){ 
+		for(int i = 0 ; i < 3 ; i++) {
+		System.out.print("a=");
+		int a = scan.nextInt();
+		System.out.print("b=");
+		int b = scan.nextInt();
+		System.out.println("Cmmdc este: " +cmmdc(a,b));
+		}
+	}
+	public int cmmdc(int a, int b) {
+		if(a==0)
+			return b;
+		while(b!=0)
+		{
+			if(a>b)
+				a=a-b;
+			else b=b-a;
+		}
+		return a;
+	}
+}
+public class Problema5 {
+	public static void main(String[] args) {
+		cmmdc ob = new cmmdc();
+		ob.start();
+	}
+}
+

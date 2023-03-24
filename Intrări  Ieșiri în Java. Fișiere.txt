@@ -1,0 +1,73 @@
+1)Folosind mecanismul preluării datelor de la tastatură cu un BufferedReader și InputStreamReader, preluați: un 
+mesaj de tip String, ziua ca intreg, luna de tip String si anul ca un întreg. Procesul se va încheia în momentul
+trecerii la o nouă linie, când se va afișa fiecare câmp pe o linie separată. Afisati de asemenea toate campurile 
+in ordinea in care au aparut.
+Recomandare: Folosiți clasa StreamTokenizer, atributele sval, nval respectiv constanta TT_EOL.
+Considerați și cazul în care nu cunoașteți natura câmpurilor introduse (numeric, cuvânt) folosind constantele
+TT_NUMBER, TT_WORD.
+
+import java.io.StringReader;
+import java.io.IOException;
+import java.io.StreamTokenizer; 
+import java.io.BufferedReader;
+import java.io.InputStreamReader; 
+public class Problema1 { 
+    public static void main(String[] args) throws Exception { 
+    	BufferedReader bufRead = new BufferedReader (new InputStreamReader (System.in));
+    	System.out.println("Introduceti datele: ");
+    	String bufReadString = bufRead.readLine();
+    	System.out.print("Datele introduse sunt:  "+bufReadString);  
+    	System.out.println();
+        StringReader sr = new StringReader(bufReadString); 
+        StreamTokenizer st = new StreamTokenizer(sr); 
+        try { 
+            while (st.nextToken() != StreamTokenizer.TT_EOL) { 
+                switch (st.ttype) { 
+                    case StreamTokenizer.TT_WORD: 
+                        System.out.println (st.sval); 
+                   break;
+                    case StreamTokenizer.TT_NUMBER: 
+                        System.out.println(st.nval);  
+                        break; 
+                } 
+            } 
+        } catch (IOException e) { 
+            e.printStackTrace(); 
+        } 
+    } 
+}
+
+
+2)Implementați aplicația anterioară folosind un fișier de intrare care conține un anumit număr de inregistrări 
+cu formatul specificat mai sus.
+
+import java .io.*;
+import java.io.StringReader;
+import java.io.IOException;
+import java.io.StreamTokenizer; 
+import java.io.BufferedReader;
+ 
+public class Problema2 { 
+    public static void main(String[] args) throws Exception { 
+    	BufferedReader bufRead = new BufferedReader(new FileReader("D:\\FACULTA\\An2 sem 2\\IS\\Lab8\\lab81\\Problema2.txt"));
+    	System.out.println("Introduceti datele: ");
+    	String bufReadString = bufRead.readLine();
+    	System.out.print("Datele introduse sunt:  "+bufReadString);  
+    	System.out.println();
+        StringReader sr = new StringReader(bufReadString); 
+        StreamTokenizer st = new StreamTokenizer(bufRead); 
+        try { 
+            while (st.nextToken() != StreamTokenizer.TT_EOL) { 
+                switch (st.ttype) { 
+                    case StreamTokenizer.TT_WORD: 
+                        System.out.println (st.sval); 
+                   break;
+                    case StreamTokenizer.TT_NUMBER: 
+                        System.out.println(st.nval);                       
+                } 
+            } 
+        } catch (IOException e) { 
+            e.printStackTrace(); 
+        } 
+    } 
+}

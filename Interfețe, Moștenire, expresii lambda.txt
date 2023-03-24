@@ -1,0 +1,256 @@
+1)Să se implementeze o interfață Java care conține prototipurile metodelor de adunare, scădere, înmulțire, 
+împărțire, radical și ridicare la putere. Toate metodele vor avea doi parametri de tip double și vor specifica 
+tipul returnat double.
+Implementați interfața astfel încât operațiile să fie definite în cadrul unei clase. Instanțiați clasa și 
+verificați operațiile implementate.
+
+import java.util.Scanner;
+interface operatii{
+	double adunare();
+	double scadere();
+	double inmultire();
+	double impartire();
+	double radical();
+	double putere();
+}
+class X implements operatii{
+	public double adunare(double a,double b) {
+		double sum;
+		sum=a+b;
+		
+		return sum;
+	}
+	public double scadere(double a,double b) {
+		double dif;
+		dif=a-b;
+		return dif;
+	}
+	public double inmultire(double a,double b) {
+		double inm;
+		inm=a*b;
+		return inm;
+	}
+	public double impartire(double a,double b) {
+		double imp;
+		imp=a/b;
+		return imp;
+	}
+	public double radical(double a) {
+		double rad;
+		rad=Math.sqrt(a);
+	    return rad;
+	}
+	public double putere(double a, double b) {
+		double put;
+		put=Math.pow(a,b);
+	    return put;
+	}
+}
+class Test{
+	public static void main (String[] args) {
+		double a,b;
+		X ob1=new X();
+		Scanner scan=new Scanner(System.in);
+		System.out.print("a= ");;
+		a=scan.nextDouble();
+		System.out.print("b= ");;
+		b=scan.nextDouble();
+		System.out.println("Suma este: "+ob1.adunare(a,b));
+		System.out.println("Diferenta este: "+ob1.scadere(a,b));
+		System.out.println("Inmultirea este: "+ob1.inmultire(a,b));
+		System.out.println("Impartirea este: "+ob1.impartire(a,b));
+		System.out.println("Radicalul numarului este: "+ob1.radical(a));
+		System.out.println("Ridicarea la putere este: "+ob1.putere(a,b));
+	}
+}
+
+
+
+1')În loc de o interfață care conține toate metodele menționate anterior, să se implementeze 4 interfețe 
+funcționale, câte una pentru fiecare metodă.
+Interfețele vor fi implementate în cadrul unei singure clase. Instanțiați clasa și verificați operațiile 
+implementate.
+
+import java.util.Scanner;
+interface suma{
+	double adunare();
+}
+interface diferenta{
+	double scadere();
+}
+interface inmultire{
+	double inmultire();
+}
+interface impartire{
+	double impartire();
+}
+interface radical{
+	double radical();
+}
+interface putere{
+	double putere();
+}
+class X implements suma, diferenta,inmultire,impartire, radical, putere{
+	public double adunare(double a,double b) {
+		double sum;
+		sum=a+b;
+		return sum;
+	}
+	public double scadere(double a,double b) {
+		double dif;
+		dif=a-b;
+		return dif;
+	}
+	public double inmultire(double a,double b) {
+		double inm;
+		inm=a*b;
+		return inm;
+	}
+	public double impartire(double a,double b) {
+		double imp;
+		imp=a/b;
+		return imp;
+	}
+	public double radical(double a) {
+		double rad;
+		rad=Math.sqrt(a);
+	    return rad;
+	}
+	public double putere(double a, double b) {
+		double put;
+		put=Math.pow(a,b);
+	    return put;
+	}
+}
+class Problema1prim{
+	public static void main (String[] args) {
+		double a,b;
+		X ob1=new X();
+		Scanner scan=new Scanner(System.in);
+		System.out.print("a= ");;
+		a=scan.nextDouble();
+		System.out.print("b= ");;
+		b=scan.nextDouble();
+		System.out.println("Suma este: "+ob1.adunare(a,b));
+		System.out.println("Diferenta este: "+ob1.scadere(a,b));
+		System.out.println("Inmultirea este: "+ob1.inmultire(a,b));
+		System.out.println("Impartirea este: "+ob1.impartire(a,b));
+		System.out.println("Radicalul numarului este: "+ob1.radical(a));
+		System.out.println("Ridicarea la putere este: "+ob1.putere(a,b));
+	}
+}
+
+
+
+1")Folosiți structura de la 1’ și implementați expresii lambda pentru definirea operațiilor aritmetice. 
+Verificați funcționalitatea.
+
+
+import java.util.Scanner;
+class Problema1secund{
+	interface suma{
+		double adunare(double a, double b);
+	}
+	interface diferenta{
+		double scadere(double a, double b);
+	}
+	interface inmultire{
+		double inmultire(double a, double b);
+	}
+	interface impartire{
+		double impartire(double a, double b);
+	}
+	interface radical{
+		double radical(double a);
+	}
+	interface putere{
+		double putere(double a, double b);
+	}
+	public static void main (String[] args) {
+		
+		double a,b;
+		X ob1=new X();
+		Scanner scan=new Scanner(System.in);
+		System.out.print("a= ");;
+		a=scan.nextDouble();
+		System.out.print("b= ");;
+		b=scan.nextDouble();
+		suma suma = (x, y) -> (x + y);
+		System.out.println("Suma este: "+suma.adunare(a,b));
+		diferenta diferenta = (x, y) -> (x - y);
+		System.out.println("Diferenta este: "+diferenta.scadere(a,b));
+		inmultire inmultire = (x, y) -> (x * y);
+		System.out.println("Inmultirea este: "+inmultire.inmultire(a,b));
+		impartire impartire = (x, y) -> (x / y);
+		System.out.println("Impartirea este: "+impartire.impartire(a,b));
+		radical radical = (x) -> Math.sqrt(x);
+		System.out.println("Radicalul numarului este: "+radical.radical(a));
+		putere putere = (x,y) -> Math.pow(x,y);
+		System.out.println("Ridicarea la putere este: "+putere.putere(a,b));
+	}
+}
+
+
+
+2)Definiți o interfață denumită FormaGeometrica care are 2 metode care primesc ca parametru o valoare integer 
+și returnează o valoare double reprezentînd aria, respectiv perimetrul unei forme geometrice echilaterale.
+
+
+import java.util.Scanner;
+interface FormaGeometrica{
+	public double arie(double a);
+	public double perimetru(double a);
+}
+class patrat implements FormaGeometrica{
+	public double arie(double a) {
+		double Ap;
+		Ap=a*a;
+		return Ap;
+	}
+	public double perimetru(double a) {
+		double Pp;
+		Pp=4*a;
+		return Pp;
+	}
+}
+class triunghi implements FormaGeometrica{
+	public double arie(double a) {
+		double At;
+		At=(a*Math.sqrt(3)/6);
+		return At;
+	}
+	public double perimetru(double a) {
+		double Pt;
+		Pt=3*a;
+		return Pt;
+	}
+}
+class hexagon implements FormaGeometrica{
+	public double arie(double a) {
+		double Ah;
+		Ah=(3*a*a*Math.sqrt(3)/2);
+		return Ah;
+	}
+	public double perimetru(double a) {
+		double Ph;
+		Ph=6*a;
+		return Ph;
+	}
+}
+class Problema2{
+	public static void main (String[] args) {
+		double a;
+		Scanner scan=new Scanner(System.in);
+		System.out.print("a= ");;
+		a=scan.nextDouble();
+		patrat ob1=new patrat();
+		System.out.println("Aria patratului este: "+ob1.arie(a));
+		System.out.println("Perimetrul patratului este: "+ob1.perimetru(a));
+		triunghi ob2=new triunghi();
+		System.out.println("Aria triunghiului este: "+ob2.arie(a));
+		System.out.println("Perimetrul triunghiului este: "+ob2.perimetru(a));
+		hexagon ob3=new hexagon();
+		System.out.println("Aria hexagonului este: "+ob3.arie(a));
+		System.out.println("Perimetrul hexagonului este: "+ob3.perimetru(a));
+	}
+}

@@ -1,0 +1,305 @@
+1)Implementați o aplicație Java care folosește GridLayout pentru aranjarea în pagină a componentelor unei 
+aplicații de calcul (TextField pt. intrare/ieșire, butoane pentru numere, operații matematice, ștergerea 
+ecranului, etc.).
+
+package lab11;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import java.awt.GridLayout;
+
+public class Problema1 {
+	
+	
+	public static void main(String[] args) {
+		
+		
+		JFrame frame = new JFrame("Problema1");
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    JTextField intrare = new JTextField("Intrare");
+	    JTextField iesire = new JTextField("Iesire");
+		JButton jb1 = new JButton("1");		
+		JButton jb2 = new JButton("2");
+		JButton jb3 = new JButton("3");		
+		JButton jb4 = new JButton("4");
+		JButton jb5 = new JButton("5");			
+		JButton jb6 = new JButton("6");		
+		JButton jb7 = new JButton("7");
+		JButton jb8 = new JButton("8");		
+		JButton jb9 = new JButton("9");
+		JButton jb10 = new JButton("+");	
+		JButton jb11 = new JButton("-");	
+		JButton jb12 = new JButton("*");	
+		JButton jb13 = new JButton("/");	
+		
+	
+		JPanel panel = new JPanel();
+		
+		panel.setLayout(new GridLayout(3, 3));
+		panel.add(intrare);
+		panel.add(jb1);
+		panel.add(jb2);
+		panel.add(jb3);
+		panel.add(jb4);
+		panel.add(jb5);
+		panel.add(jb6);
+		panel.add(jb7);
+		panel.add(jb8);
+		panel.add(jb9);
+		panel.add(jb10);
+		panel.add(jb11);
+		panel.add(jb12);
+		panel.add(jb13);
+		panel.add(iesire);
+		frame.add(panel);
+		frame.setSize(700,700);
+		frame.setVisible(true);
+		
+	}
+
+}
+
+
+
+2)Implementați o aplicație Java care folosește GridBagLayout pentru aranjarea în pagină a componentelor unei 
+aplicații de calcul (TextField pt. intrare/ieșire, butoane pentru numere, operații matematice, ștergerea 
+ecranului, etc.).
+
+package lab11;
+
+
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+
+public class Problema2 {
+
+	public static void main(String[] args) {
+		
+		
+		JFrame frame = new JFrame("Problema2");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		JPanel panel = new JPanel();
+		GridBagLayout layout = new GridBagLayout();
+		
+		panel.setLayout(layout);
+		GridBagConstraints gbc = new GridBagConstraints();
+		JTextField intrare = new JTextField("Intrare");
+		JTextField iesire = new JTextField("Iesire");
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy =0 ;
+		panel.add(intrare, gbc);
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 1;
+		gbc.gridy =0 ;
+		panel.add(new JButton("0"), gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 2;
+		gbc.gridy =0 ;
+		panel.add(new JButton("1"), gbc);
+
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 3;
+		gbc.gridy =0 ;
+		panel.add(new JButton("2"), gbc);
+
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy =1 ;
+		panel.add(new JButton("3"), gbc);
+
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 1;
+		gbc.gridy =1 ;
+		panel.add(new JButton("4"), gbc);
+
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 2;
+		gbc.gridy =1 ;
+		panel.add(new JButton("5"), gbc);
+
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 3;
+		gbc.gridy =1 ;
+		panel.add(new JButton("6"), gbc);
+
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy =2 ;
+		panel.add(new JButton("7"), gbc);
+
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 1;
+		gbc.gridy =2;
+		panel.add(new JButton("8"), gbc);
+
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 2;
+		gbc.gridy =2 ;
+		panel.add(new JButton("9"), gbc);
+
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 3;
+		gbc.gridy =2 ;
+		panel.add(new JButton("+"), gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		panel.add(new JButton("-"), gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 3;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		panel.add(new JButton("*"), gbc);
+		
+		gbc.fill = GridBagConstraints.VERTICAL;
+		gbc.gridx = 2;
+		gbc.gridy =3 ;
+		panel.add(new JButton("/"), gbc);
+
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 3;
+		gbc.gridy =3 ;
+		panel.add(iesire, gbc);
+		
+		frame.add(panel);
+		
+		frame.setSize(700,700);
+		frame.setVisible(true);
+
+	}
+
+}
+
+
+
+3)Implementați o aplicație de tip TabbedView care afișează în fiecare panou grafic:
+- o zonă de desenare
+- componente pentru selectarea tipului de font, a mărimii de font și a culorii textului
+- componente pentru alegerea unei forme geometrice (dintr-un set predefinit) și a mărimii laturii / razei (după caz)
+
+
+package lab11;
+
+import java.awt.event.*;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.Label;
+
+public class Problema3{
+	final static String PAINTPANEL="Zona de desenare";
+	final static String FONTPANEL="Selectare font";
+	final static String FORMPANEL="Selectare forma geometrica";
+	
+	public void addComponentToPane(Container pane) {
+		JTabbedPane tabbedPane = new JTabbedPane();
+		JLabel l1,l2,l3,l4,l5=new JLabel();	 
+		
+		JPanel page1 = new JPanel();
+		page1.add(new MyDrawing());
+
+		
+		JPanel page2 = new JPanel();
+		Choice choice1 = new Choice();
+		choice1.add("Bold");
+		choice1.add("Italic");
+		choice1.add("Calibri");
+		
+		
+		Choice choice2 = new Choice();
+		choice2.add("5");
+		choice2.add("10");
+		choice2.add("15");
+		
+		Choice choice3 = new Choice();
+		choice3.add("Rosu");
+		choice3.add("Negru");
+		choice3.add("Verde");
+		
+		l1=new JLabel("Tip font");
+		page2.add(choice1);
+		l2=new JLabel("Marime font");
+		page2.add(choice2);
+		l3=new JLabel("Culoare font");
+		page2.add(choice3);
+
+		
+    	
+    	JPanel page3 = new JPanel();
+    	Choice choice4 = new Choice(); 
+		choice4.add("Patrat");
+		choice4.add("Cerc");
+		Choice choice5 = new Choice(); 
+		choice5.add("1");
+		choice5.add("2");
+		choice5.add("3");
+		choice5.add("4");
+		choice5.add("5");
+		choice5.add("6");
+		
+		l4=new JLabel("Forma geometrica");
+		page3.add(choice4);
+		l5=new JLabel("Lungime latura/raza");
+		page3.add(choice5);
+    	
+    	tabbedPane.addTab(PAINTPANEL, page1);
+    	tabbedPane.addTab(FONTPANEL, page2);
+    	tabbedPane.addTab(FORMPANEL, page3);
+    	
+    	pane.add(tabbedPane, BorderLayout.CENTER);
+	}
+	@SuppressWarnings("serial")
+	class MyDrawing extends JPanel { 
+		public MyDrawing() {
+		}
+	    @Override public void paintComponent(Graphics g) {
+	         super.paintComponent(g);
+	         g.drawRect(5, 5,5 ,5);
+	    }
+	}
+	
+	
+	private static void createAndShowGUI() {
+        
+    	JFrame frame = new JFrame("Problema3");
+    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    
+    	Problema3 demo = new Problema3();
+    	demo.addComponentToPane(frame.getContentPane());
+
+   
+    	frame.setSize(1000,1000);
+    	frame.setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		
+    
+	try {
+        		UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+    	} 
+	catch (UnsupportedLookAndFeelException ex) {
+        		ex.printStackTrace();
+    	} 
+	catch (IllegalAccessException ex) {
+        		ex.printStackTrace();
+    	} 
+	catch (InstantiationException ex) {
+        		ex.printStackTrace();
+    	} 
+	catch (ClassNotFoundException ex) {
+        		ex.printStackTrace();
+    	}
